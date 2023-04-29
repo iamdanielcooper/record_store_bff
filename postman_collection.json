@@ -1,0 +1,30 @@
+{
+	"info": {
+		"_postman_id": "645387ad-af1c-438f-9d08-a601c9c7cac9",
+		"name": "Record Store BFF",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET record details by barcode",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/v1/details/673855043913",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"v1",
+						"details",
+						"673855043913"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
