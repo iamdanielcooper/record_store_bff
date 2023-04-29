@@ -1,4 +1,4 @@
-const { Details } = require('./model');
+const { Details } = require('../models/model');
 
 const getByBarcode = async (req, res) => {
     try {

@@ -1,4 +1,4 @@
-const { Discogs } = require('../integrations/discogs/model');
+const { Discogs } = require('../../integrations/discogs/model');
 
 class Details {
     constructor(data) {
