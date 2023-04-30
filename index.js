@@ -5,5 +5,5 @@ app.get('/', (req, res) => {
     res.send('Nothing...');
 });
 
-const details = require('./details/routes');
+const details = require('./details/routes/routes');
 app.use(`/${version}/details`, details);
