@@ -1,17 +1,16 @@
 const express = require('express');
-const dotenv = require('dotenv');
 const cors = require('cors');
-
-dotenv.config();
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
-const port = process.env.PORT;
 
-app.listen(port, () => {
-    console.log(`[server]: Server is running at http://localhost:${port}`);
+app.get('/', (req, res) => {
+    res.status(200).send('Nothing...');
 });
 
-module.exports = { app };
+const details = require('./details/routes/routes');
+app.use(`/v1/details`, details);
+
+module.exports = app;
