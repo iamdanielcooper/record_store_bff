@@ -1,7 +1,4 @@
 const { discogsClient } = require('./connection');
-const dotenv = require('dotenv');
-
-dotenv.config();
 
 class Discogs {
     constructor(data) {}
