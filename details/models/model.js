@@ -35,7 +35,9 @@ class Details {
         return [
             ...new Set(
                 albumDetailsArray.map(item =>
-                    !item.formats[0].text ? 'Black' : item.formats[0].text
+                    !item.formats || !item.formats[0].text
+                        ? 'Black'
+                        : item.formats[0].text
                 )
             ),
         ];
