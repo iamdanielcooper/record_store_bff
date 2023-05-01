@@ -9,7 +9,6 @@ class Discogs {
                 if (err) {
                     reject(err);
                 }
-                console.log(data);
                 resolve(data);
             });
         });
