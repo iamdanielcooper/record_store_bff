@@ -2,7 +2,7 @@ const request = require('supertest');
 const server = require('../../app');
 const Details = require('../models/model');
 
-describe('Details endpoint tests', () => {
+describe('GET /details/{barcode} endpoint tests', () => {
     let api;
 
     beforeAll(() => {
@@ -127,5 +127,90 @@ describe('Details endpoint tests', () => {
         expect(temp.body.formats).toEqual(mockResponse.formats);
         expect(temp.body.cover).toEqual(mockResponse.cover);
         expect(temp.body.barcode).toEqual(mockResponse.barcode);
+    });
+});
+
+describe('GET /details/{barcode} endpoint tests', () => {
+    let api;
+
+    beforeAll(() => {
+        api = server.listen(0, () =>
+            console.log('Test server running on port 0')
+        );
+    });
+
+    afterAll(done => {
+        console.log('Stopping test server');
+        api.close(done);
+    });
+
+    test('Requesting POST /details/{valid_barcode} with all required and optional fields returns 200', done => {
+        const requestBody = {
+            title: 'Deep Cuts',
+            artist: 'The Knife',
+            year: '',
+            barcode: '122344',
+            pressingColour: 'Magenta',
+            stock: 3,
+            isUsed: false,
+            price: 2.22,
+            listen: 'http://example.com',
+        };
+
+        request(api)
+            .post('/v1/details/081227941468')
+            .send(requestBody)
+            .expect(200, done);
+    });
+
+    test('Requesting POST /details/{valid_barcode} with only required fields returns 200', done => {
+        const requestBody = {
+            title: 'Deep Cuts',
+            artist: 'The Knife',
+            year: '',
+            barcode: '122344',
+            pressingColour: 'Magenta',
+            stock: 3,
+            isUsed: false,
+            price: 2.22,
+        };
+
+        request(api)
+            .post('/v1/details/081227941468')
+            .send(requestBody)
+            .expect(200, done);
+    });
+
+    test('Requesting POST /details/{valid_barcode} with no body returns 400', done => {
+        request(api).post('/v1/details/081227941468').expect(400, done);
+    });
+
+    test('Requesting POST /details/{valid_barcode} with some required fields absent returns 400', done => {
+        const requestBody = {
+            title: 'Deep Cuts',
+            artist: 'The Knife',
+            year: '',
+            price: 2.22,
+        };
+
+        request(api)
+            .post('/v1/details/081227941468')
+            .send(requestBody)
+            .expect(400, done);
+    });
+
+    test('Requesting POST /details/{valid_barcode} with only optional fields returns 400', done => {
+        const requestBody = {
+            title: 'Deep Cuts',
+            artist: 'The Knife',
+            year: '',
+            price: 2.22,
+            listen: 'http://example.com',
+        };
+
+        request(api)
+            .post('/v1/details/081227941468')
+            .send(requestBody)
+            .expect(400, done);
     });
 });
