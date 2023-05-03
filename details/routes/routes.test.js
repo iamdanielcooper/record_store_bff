@@ -148,7 +148,7 @@ describe('GET /details/{barcode} endpoint tests', () => {
         const requestBody = {
             title: 'Deep Cuts',
             artist: 'The Knife',
-            year: '',
+            year: '2012',
             barcode: '122344',
             pressingColour: 'Magenta',
             stock: 3,
@@ -167,7 +167,7 @@ describe('GET /details/{barcode} endpoint tests', () => {
         const requestBody = {
             title: 'Deep Cuts',
             artist: 'The Knife',
-            year: '',
+            year: '2012',
             barcode: '122344',
             pressingColour: 'Magenta',
             stock: 3,
@@ -212,5 +212,95 @@ describe('GET /details/{barcode} endpoint tests', () => {
             .post('/v1/details/081227941468')
             .send(requestBody)
             .expect(400, done);
+    });
+
+    test('Requesting POST /details/{valid_barcode} with stock as a string returns 400', done => {
+        const requestBody = {
+            title: 'Deep Cuts',
+            artist: 'The Knife',
+            year: '',
+            barcode: '122344',
+            pressingColour: 'Magenta',
+            stock: 'Threehundred',
+            isUsed: false,
+            price: 2.22,
+        };
+
+        request(api)
+            .post('/v1/details/081227941468')
+            .send(requestBody)
+            .expect(400, done);
+    });
+
+    test('Requesting POST /details/{valid_barcode} with price as a string returns 400', done => {
+        const requestBody = {
+            title: 'Deep Cuts',
+            artist: 'The Knife',
+            year: '',
+            barcode: '122344',
+            pressingColour: 'Magenta',
+            stock: 'Threehundred',
+            isUsed: false,
+            price: '2.22',
+        };
+
+        request(api)
+            .post('/v1/details/081227941468')
+            .send(requestBody)
+            .expect(400, done);
+    });
+
+    test('Requesting POST /details/{valid_barcode} with empty strings for required values 400', done => {
+        const requestBody = {
+            title: '',
+            artist: 'The Knife',
+            year: '2012',
+            barcode: '122344',
+            pressingColour: 'Magenta',
+            stock: 2,
+            isUsed: false,
+            price: '2.22',
+        };
+
+        request(api)
+            .post('/v1/details/081227941468')
+            .send(requestBody)
+            .expect(400, done);
+    });
+
+    test('Requesting POST /details/{valid_barcode} with none positive integers for stock returns 400', done => {
+        const requestBody = {
+            title: 'Deep Cuts',
+            artist: 'The Knife',
+            year: '2002',
+            barcode: '122344',
+            pressingColour: 'Magenta',
+            stock: -1,
+            isUsed: false,
+            price: '2.22',
+        };
+
+        request(api)
+            .post('/v1/details/081227941468')
+            .send(requestBody)
+            .expect(400, done);
+    });
+
+    test('Requesting POST /details/{valid_barcode} with 0 for stock returns 200', done => {
+        const requestBody = {
+            title: 'Deep Cuts',
+            artist: 'The Knife',
+            year: '2002',
+            barcode: '122344',
+            pressingColour: 'Magenta',
+            stock: 0,
+            isUsed: false,
+            price: '2.22',
+        };
+
+        request(api)
+            .post('/v1/details/081227941468')
+            .send(requestBody)
+            .expect(200, done);
     });
 });
