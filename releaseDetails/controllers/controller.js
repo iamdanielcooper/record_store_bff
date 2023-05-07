@@ -1,8 +1,8 @@
-const Details = require('../models/model');
+const ReleaseDetails = require('../models/model');
 
 const getByBarcode = async (req, res) => {
     try {
-        const data = await Details.addDetails(req.params.barcode);
+        const data = await ReleaseDetails.getByBarcode(req.params.barcode);
         res.send(data);
     } catch (error) {
         res.status(404).send(error.message);

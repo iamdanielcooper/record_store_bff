@@ -1,4 +1,4 @@
-const Details = require('./model');
+const ReleaseDetails = require('./model');
 const { Discogs } = require('../../integrations/discogs/model');
 
 describe('Details model tests', () => {
@@ -36,7 +36,7 @@ describe('Details model tests', () => {
         Discogs.getInfo = jest.fn();
         Discogs.getInfo.mockReturnValue(mockResponse);
 
-        const result = await Details.addDetails('validBarcode');
+        const result = await ReleaseDetails.getByBarcode('validBarcode');
 
         expect(result.year).toEqual(mockResponse.results[0].year);
         expect(result.formats).toEqual(mockResponse.results[0].format);
@@ -103,7 +103,7 @@ describe('Details model tests', () => {
         Discogs.getInfo = jest.fn();
         Discogs.getInfo.mockReturnValue(mockResponse);
 
-        const result = await Details.addDetails('validBarcode');
+        const result = await ReleaseDetails.getByBarcode('validBarcode');
 
         expect(result.pressingColours.length).toEqual(1);
     });
@@ -198,7 +198,7 @@ describe('Details model tests', () => {
         Discogs.getInfo = jest.fn();
         Discogs.getInfo.mockReturnValue(mockResponse);
 
-        const result = await Details.addDetails('validBarcode');
+        const result = await ReleaseDetails.getByBarcode('validBarcode');
 
         expect(result.pressingColours.length).toEqual(2);
     });
@@ -299,7 +299,7 @@ describe('Details model tests', () => {
         Discogs.getInfo = jest.fn();
         Discogs.getInfo.mockReturnValue(mockResponse);
 
-        const result = await Details.addDetails('validBarcode');
+        const result = await ReleaseDetails.getByBarcode('validBarcode');
 
         expect(result.pressingColours.length).toEqual(1);
     });

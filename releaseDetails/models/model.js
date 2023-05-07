@@ -1,6 +1,6 @@
 const { Discogs } = require('../../integrations/discogs/model');
 
-class Details {
+class ReleaseDetails {
     constructor(data) {
         this.barcode = data[0].barcode;
         this.artist = data[0].title.split('-')[0].trim();
@@ -15,16 +15,16 @@ class Details {
     }
 
     static create(discogsData) {
-        return new Details(discogsData);
+        return new ReleaseDetails(discogsData);
     }
 
-    static async addDetails(barcode) {
-        const albumDetails = await Discogs.getInfo(barcode);
+    static async getByBarcode(barcode) {
+        const releaseDetails = await Discogs.getInfo(barcode);
 
-        if (albumDetails.pagination.items === 0) {
+        if (releaseDetails.pagination.items === 0) {
             throw new Error('No results found');
         } else {
-            const details = new Details(albumDetails.results);
+            const details = new ReleaseDetails(releaseDetails.results);
             details.barcode = barcode;
 
             return details;
@@ -44,4 +44,4 @@ class Details {
     };
 }
 
-module.exports = Details;
+module.exports = ReleaseDetails;

@@ -10,7 +10,10 @@ app.get('/', (req, res) => {
     res.status(200).send('Nothing...');
 });
 
-const details = require('./details/routes/routes');
-app.use(`/v1/details`, details);
+const releaseDetails = require('./releaseDetails/routes/routes');
+app.use(`/v1/release-details`, releaseDetails);
+
+const inventoryDetails = require('./inventory/routes/routes');
+app.use('/v1/inventory', inventoryDetails);
 
 module.exports = app;
