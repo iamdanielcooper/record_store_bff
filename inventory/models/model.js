@@ -21,6 +21,18 @@ class InventoryRecord {
     static addNewInventoryRecord(data) {
         return this.create(data);
     }
+
+    // TODO
+    static getInventoryRecord(barcode) {}
+
+    // TODO
+    static updateStock(barcode) {}
+
+    // TODO
+    static removeInventoryRecord(barcode) {}
+
+    // TODO
+    static updateInventoryRecord(barcode) {}
 }
 
 module.exports = InventoryRecord;
