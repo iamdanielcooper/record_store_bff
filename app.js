@@ -16,4 +16,7 @@ app.use(`/v1/release-details`, releaseDetails);
 const inventoryDetails = require('./inventory/routes/routes');
 app.use('/v1/inventory', inventoryDetails);
 
+const database = require('./database/routes/routes');
+app.use('/v1/database', database);
+
 module.exports = app;
