@@ -7,7 +7,7 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/', (req, res) => {
-    res.status(200).send('Nothing...');
+    res.status(200).send('Nothing...for now...');
 });
 
 const releaseDetails = require('./releaseDetails/routes/routes');

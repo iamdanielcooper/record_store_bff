@@ -32,3 +32,7 @@ Examples for all endpoints can be found in postman_collection.json at the root o
 | Endpoint                  | Method | Description                          |
 | ------------------------- | ------ | ------------------------------------ |
 | /details/{barcode_number} | GET    | Get an albums details by its barcode |
+
+## Deploy
+
+`gcloud builds submit --tag gcr.io/<project-id>/docker-image`
